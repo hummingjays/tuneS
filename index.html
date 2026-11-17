@@ -6,13 +6,10 @@
   <meta name="theme-color" content="#18181B" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Tune-S" />
+  <meta name="apple-mobile-web-app-title" content="Apple Music" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="application-name" content="Tune-S" />
-  <title>Tune-S — South Indian Film Music Collection</title>
-  <link id="pwa-favicon" rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
-  <link id="pwa-apple-icon" rel="apple-touch-icon" sizes="180x180" href="./icon-192.png" />
-  <link id="pwa-manifest" rel="manifest" href="./manifest.webmanifest" />
+  <meta name="application-name" content="Apple Music" />
+  <title>Music — A.R. Rahman, Anirudh Ravichander, Bharadwaj, D. Imman, Darbuka Siva, Deva, Harris Jayaraj, Ilayaraja, Sai Abhyankkar, Santhosh Narayanan, Sean Roldan, Vidyasagar & Yuvan Shankar Raja Collection</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,7 +43,7 @@
       background: rgba(255, 255, 255, 0.28);
     }
 
-    /* Custom Range Sliders */
+    /* Apple Music Range Sliders */
     input[type="range"].apple-slider {
       -webkit-appearance: none;
       appearance: none;
@@ -99,22 +96,9 @@
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
     }
-
-    /* Bottom Navigation Pill & Mini-Player Positioning */
-    #mobile-bottom-nav {
-      bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    }
-    #bottom-player-dock {
-      bottom: calc(76px + env(safe-area-inset-bottom, 0px));
-    }
-    @media (min-width: 1024px) {
-      #bottom-player-dock {
-        bottom: 0px;
-      }
-    }
   </style>
 </head>
-<body class="h-[100dvh] w-screen flex flex-col bg-[#18181B] text-zinc-100">
+<body class="h-screen w-screen flex flex-col bg-[#18181B] text-zinc-100">
 
   <!-- Main Workspace Wrapper -->
   <div class="flex-1 flex min-h-0 overflow-hidden relative">
@@ -124,7 +108,7 @@
 
     <!-- Left Navigation Sidebar -->
     <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-40 w-64 bg-[#1F1F23] border-r border-white/[0.07] flex flex-col transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
-      <!-- Tune-S Brand Header -->
+      <!-- Apple Music Brand Header -->
       <div class="px-5 pt-5 pb-4 flex items-center justify-between">
         <div onclick="switchView('home')" class="flex items-center gap-2.5 cursor-pointer group">
           <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-[#FA243C] to-[#FF5E7E] flex items-center justify-center shadow-md shadow-[#FA243C]/20">
@@ -132,7 +116,7 @@
               <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
             </svg>
           </div>
-          <span class="text-lg font-bold tracking-tight text-white">Tune-S</span>
+          <span class="text-lg font-bold tracking-tight text-white">Music</span>
         </div>
         <button onclick="toggleMobileSidebar(false)" class="lg:hidden p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/10">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -183,13 +167,6 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"/>
           </svg>
           <span>Songs</span>
-        </button>
-
-        <button id="nav-car-mode" onclick="switchView('car-mode')" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-neutral-300 hover:bg-white/[0.06]">
-          <svg class="w-4 h-4 text-[#FA243C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M4 11h16a1 1 0 011 1v5a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H6v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-5a1 1 0 011-1zm3 3h.01M17 14h.01"/>
-          </svg>
-          <span>Car Mode</span>
         </button>
       </div>
 
@@ -248,24 +225,6 @@
         </div>
 
         <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          <!-- Car Mode Quick-Launch Button -->
-          <button id="header-car-mode-btn" onclick="switchView('car-mode')" title="Car Mode & In-Car Audio"
-            class="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.15] border border-white/10 text-xs font-semibold text-white flex items-center gap-1.5 transition">
-            <svg class="w-3.5 h-3.5 text-[#FA243C]" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M4 11h16a1 1 0 011 1v5a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H6v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-5a1 1 0 011-1zm3 3h.01M17 14h.01"/>
-            </svg>
-            <span class="hidden sm:inline">Car Mode</span>
-          </button>
-
-          <!-- Install App Button -->
-          <button id="header-install-btn" onclick="openInstallAppModal()" title="Install Tune-S App Icon on Phone"
-            class="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.15] border border-white/10 text-xs font-semibold text-white flex items-center gap-1.5 transition">
-            <svg class="w-3.5 h-3.5 text-[#FA243C]" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
-            </svg>
-            <span class="hidden sm:inline">Install</span>
-          </button>
-
           <!-- Admin Add Album Button (Visible only when Admin is signed in) -->
           <button id="header-add-album-btn" onclick="openAddAlbumModal()" class="hidden px-3 py-1.5 rounded-full bg-[#FA243C]/15 hover:bg-[#FA243C]/25 border border-[#FA243C]/30 text-xs font-semibold text-[#FA243C] flex items-center gap-1.5 transition">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
@@ -298,16 +257,13 @@
       </header>
 
       <!-- Scrollable Viewport -->
-      <div id="main-scroll-area" class="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-10 pt-6 pb-24">
+      <div id="main-scroll-area" class="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-10 pt-6 pb-32">
         <!-- Dynamic Content Rendered Here -->
       </div>
 
-      <!-- Subtle Bottom Fade Gradient -->
-      <div class="pointer-events-none fixed bottom-0 left-0 right-0 lg:left-64 h-16 bg-gradient-to-t from-[#18181B] via-[#18181B]/75 to-transparent z-20"></div>
-
-      <!-- Floating Bottom Tab Bar (Anchored Flush Near Bottom Edge) -->
-      <nav id="mobile-bottom-nav" aria-label="Bottom Navigation" class="pointer-events-none fixed left-0 right-0 lg:hidden z-40 flex justify-center px-3">
-        <div class="pointer-events-auto w-full max-w-[440px] h-[58px] rounded-full bg-[#242428]/92 backdrop-blur-2xl border border-white/[0.12] shadow-[0_12px_36px_rgba(0,0,0,0.75)] grid grid-cols-5 items-center px-1.5">
+      <!-- iOS Floating Bottom Tab Bar -->
+      <nav aria-label="Bottom Navigation" class="pointer-events-none fixed bottom-[86px] sm:bottom-[92px] left-0 right-0 lg:left-64 z-30 flex justify-center px-3">
+        <div class="pointer-events-auto w-full max-w-[440px] h-[60px] rounded-full bg-[#242428]/90 backdrop-blur-2xl border border-white/[0.12] shadow-[0_12px_36px_rgba(0,0,0,0.65)] grid grid-cols-5 items-center px-1.5">
           <!-- Home Tab -->
           <button id="bottom-tab-home" onclick="switchView('home')" class="flex flex-col items-center justify-center gap-0.5 py-1 rounded-full transition text-[#FA243C]">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -368,8 +324,8 @@
     </main>
   </div>
 
-  <!-- Persistent Now-Playing Mini-Player Dock (Docked Above Bottom Nav on Mobile, Bottom on Desktop) -->
-  <footer id="bottom-player-dock" class="hidden fixed left-3 right-3 lg:static lg:left-auto lg:right-auto h-[68px] sm:h-[74px] lg:h-[84px] rounded-2xl lg:rounded-none glass-panel border border-white/[0.12] lg:border-0 lg:border-t lg:border-white/[0.08] px-3 sm:px-6 flex items-center justify-between gap-3 z-30 shrink-0 shadow-[0_10px_30px_rgba(0,0,0,0.65)] lg:shadow-none">
+  <!-- Bottom Persistent Apple Music Now-Playing Dock -->
+  <footer class="h-20 sm:h-[84px] glass-panel border-t border-white/[0.08] px-3 sm:px-6 flex items-center justify-between gap-3 z-50 shrink-0">
 
     <!-- Left: Artwork & Track Metadata -->
     <div class="flex items-center gap-3 w-[30%] min-w-[130px] sm:min-w-[200px]">
@@ -378,7 +334,7 @@
       </div>
       <div class="min-w-0 flex-1">
         <div onclick="switchView('now-playing')" id="player-title" class="text-xs sm:text-sm font-semibold text-white truncate cursor-pointer hover:text-[#FA243C] transition" title="Open Now Playing">Select a song to play</div>
-        <div id="player-artist" class="text-[11px] sm:text-xs text-neutral-400 truncate mt-0.5">Tune-S Collection</div>
+        <div id="player-artist" class="text-[11px] sm:text-xs text-neutral-400 truncate mt-0.5">Apple Music Collection</div>
         <div id="player-source-links" class="hidden sm:flex items-center gap-2 mt-1">
           <button onclick="jumpToCurrentTrackAlbum()" id="player-album-link" class="hidden text-[10px] font-medium text-[#FA243C] hover:underline truncate max-w-[140px]">
             Go to Album
@@ -641,586 +597,70 @@
     <div id="toast-inner" class="px-4 py-2 rounded-full bg-neutral-900/95 border border-white/15 text-xs font-medium text-white shadow-xl backdrop-blur-md"></div>
   </div>
 
-  <!-- In-Car Integration / Native Wrapper Guide Modal -->
-  <div id="car-guide-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-    <div class="bg-[#232328] border border-white/15 rounded-3xl max-w-2xl w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
-      <div class="px-6 py-4 border-b border-white/10 flex items-center justify-between shrink-0">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-[#FA243C]/20 text-[#FA243C] flex items-center justify-center">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M4 11h16a1 1 0 011 1v5a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H6v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-5a1 1 0 011-1zm3 3h.01M17 14h.01"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="text-base sm:text-lg font-bold text-white">In-Car & Android Auto Compatibility</h3>
-            <p class="text-[11px] text-neutral-400">Bluetooth Head-Unit Sync & Native Car Launcher Setup</p>
-          </div>
-        </div>
-        <button onclick="closeCarGuideModal()" class="text-neutral-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-
-      <div class="p-6 overflow-y-auto space-y-5 text-xs sm:text-sm text-neutral-300 leading-relaxed">
-        <!-- What works right now -->
-        <div class="rounded-2xl bg-emerald-500/10 border border-emerald-500/25 p-4 space-y-1.5">
-          <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span>Active Now: Car Bluetooth / USB Media Session</span>
-          </div>
-          <p class="text-xs text-neutral-300">
-            When your phone connects to your car via <strong>Bluetooth or USB Audio</strong>, Tune-S automatically broadcasts <strong>Song Title, Composer, Album Art, Track Duration, and Live Scrubber Position</strong> via the Web Media Session API, and responds to steering-wheel <strong>Play, Pause, Next, Previous, and Seek</strong> buttons.
-          </p>
-        </div>
-
-        <!-- Why browser web apps aren't on the in-car launcher -->
-        <div class="rounded-2xl bg-amber-500/10 border border-amber-500/25 p-4 space-y-1.5">
-          <div class="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
-            <span>Important Platform Requirement</span>
-          </div>
-          <p class="text-xs text-neutral-300">
-            In-car infotainment platforms restrict web browsers from appearing directly on the dashboard app grid for driver safety. To make <strong>Tune-S</strong> discoverable as an icon on your vehicle's screen, wrap this HTML file inside a lightweight native Android/iOS shell with the car manifests below:
-          </p>
-        </div>
-
-        <!-- Tabs for Android Auto vs iOS Car Audio Starter Config -->
-        <div class="space-y-2.5">
-          <div class="flex items-center justify-between">
-            <div class="flex gap-2">
-              <button id="car-tab-android" onclick="switchCarGuideTab('android')" class="px-3.5 py-1.5 rounded-full bg-[#FA243C] text-white text-xs font-bold transition">
-                Android Auto Manifest
-              </button>
-              <button id="car-tab-carplay" onclick="switchCarGuideTab('carplay')" class="px-3.5 py-1.5 rounded-full bg-white/10 text-neutral-300 hover:text-white text-xs font-bold transition">
-                iOS Car Audio Scene
-              </button>
-            </div>
-            <button onclick="copyCarWrapperSnippet()" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white flex items-center gap-1.5 transition">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-              <span>Copy Config</span>
-            </button>
-          </div>
-          <pre id="car-wrapper-code" class="bg-black/60 border border-white/10 rounded-xl p-3.5 text-[11px] font-mono text-neutral-200 overflow-x-auto whitespace-pre leading-relaxed"></pre>
-        </div>
-      </div>
-
-      <div class="px-6 py-3.5 border-t border-white/10 flex justify-end shrink-0">
-        <button onclick="closeCarGuideModal()" class="px-5 py-2 rounded-full bg-[#FA243C] hover:bg-[#E01E34] text-white text-xs font-bold transition">
-          Done
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Install Tune-S App & Android Home Screen Icon Modal -->
-  <div id="install-app-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-    <div class="bg-[#232328] border border-white/15 rounded-3xl max-w-lg w-full max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
-      <div class="px-6 py-4 border-b border-white/10 flex items-center justify-between shrink-0">
-        <div class="flex items-center gap-3">
-          <img id="install-modal-preview-icon" src="" alt="Tune-S Icon" class="w-10 h-10 rounded-xl border border-white/15 shadow-md bg-neutral-900" />
-          <div>
-            <h3 class="text-base sm:text-lg font-bold text-white">Install Tune-S on Android</h3>
-            <p class="text-[11px] text-neutral-400">GitHub Pages WebAPK Packager & Home Screen Icon</p>
-          </div>
-        </div>
-        <button onclick="closeInstallAppModal()" class="text-neutral-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-      </div>
-
-      <div class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-neutral-300 leading-relaxed">
-        <!-- Root cause explanation -->
-        <div class="rounded-2xl bg-amber-500/10 border border-amber-500/25 p-4 space-y-1.5">
-          <div class="text-amber-400 font-bold text-xs uppercase tracking-wider">Why the icon disappeared after 1 second</div>
-          <p class="text-xs text-neutral-300">
-            Android Chrome's WebAPK server cannot read inline <code class="text-neutral-100">data:</code> manifests—it requires real HTTPS files (<code class="text-neutral-100">manifest.webmanifest</code>, <code class="text-neutral-100">icon-192.png</code>, <code class="text-neutral-100">icon-512.png</code>, and <code class="text-neutral-100">sw.js</code>) committed to your <code class="text-neutral-100">hummingjays.github.io</code> repository alongside <code class="text-neutral-100">index.html</code>.
-          </p>
-        </div>
-
-        <!-- Primary 1-Tap GitHub Pages PWA Packager -->
-        <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-4 space-y-3">
-          <div class="flex items-center justify-between gap-2">
-            <div class="text-white font-bold text-xs uppercase tracking-wider">Step 1: Add These 4 Files to GitHub</div>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">Permanent App Drawer Icon</span>
-          </div>
-          <p class="text-xs text-neutral-400">
-            Download all 4 static PWA files below and upload them to the exact same folder as your HTML file on GitHub Pages:
-          </p>
-
-          <button onclick="downloadAllGitHubPwaFiles()"
-            class="w-full py-3 px-4 rounded-xl bg-[#FA243C] hover:bg-[#E01E34] active:scale-[0.99] text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FA243C]/25 transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
-            </svg>
-            <span>Download All 4 PWA Files for GitHub</span>
-          </button>
-
-          <div class="grid grid-cols-2 gap-2 pt-1">
-            <button onclick="downloadStaticManifestWebmanifest()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
-              1. manifest.webmanifest
-            </button>
-            <button onclick="downloadStaticPngIcon192()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
-              2. icon-192.png
-            </button>
-            <button onclick="downloadStaticPngIcon512()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
-              3. icon-512.png
-            </button>
-            <button onclick="downloadStaticServiceWorker()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
-              4. sw.js
-            </button>
-          </div>
-        </div>
-
-        <!-- Instant No-Upload Chrome Shortcut Tip -->
-        <div class="rounded-2xl bg-sky-500/10 border border-sky-500/25 p-4 space-y-1.5">
-          <div class="text-sky-400 font-bold text-xs uppercase tracking-wider">Use Chrome Shortcut Right Now (No Upload Needed)</div>
-          <p class="text-xs text-neutral-300">
-            In Chrome's <strong>⋮ Menu → Install and create shortcut</strong> sheet, tap the second option <strong>"Create shortcut (Shortcuts open in Chrome)"</strong> to place a permanent <strong>Tune-S</strong> icon on your Home Screen right away. Once you upload the 4 files above to GitHub, tapping <strong>"Install"</strong> will install a standalone App Drawer WebAPK!
-          </p>
-        </div>
-      </div>
-
-      <div class="px-6 py-3.5 border-t border-white/10 flex items-center justify-between gap-2 shrink-0">
-        <button id="native-install-trigger-btn" onclick="triggerNativePwaInstall()"
-          class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition">
-          Trigger Chrome Install Prompt
-        </button>
-        <button onclick="closeInstallAppModal()" class="px-5 py-2 rounded-full bg-[#FA243C] hover:bg-[#E01E34] text-white text-xs font-bold transition">
-          Done
-        </button>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // ==========================================
-    // Android Chrome WebAPK & GitHub Pages PWA Packager
-    // ==========================================
-    let tuneSPng192 = '';
-    let tuneSPng512 = '';
-    let deferredInstallPrompt = null;
-
-    function renderTuneSPngIcon(size) {
-      const canvas = document.createElement('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
-
-      // Deep metallic navy-indigo background (full-bleed for maskable + any)
-      const bgGrad = ctx.createLinearGradient(0, 0, size, size);
-      bgGrad.addColorStop(0, '#131B3A');
-      bgGrad.addColorStop(0.5, '#0B1024');
-      bgGrad.addColorStop(1, '#1E1438');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, size, size);
-
-      // Subtle inner metallic rounded frame
-      const pad = size * 0.08;
-      const radius = size * 0.2;
-      ctx.save();
-      ctx.beginPath();
-      ctx.roundRect(pad, pad, size - pad * 2, size - pad * 2, radius);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
-      ctx.lineWidth = Math.max(2, size * 0.015);
-      ctx.stroke();
-      ctx.restore();
-
-      // Crimson & Gold-Violet glow accents
-      const glow = ctx.createRadialGradient(size * 0.5, size * 0.45, size * 0.05, size * 0.5, size * 0.45, size * 0.42);
-      glow.addColorStop(0, 'rgba(250, 36, 60, 0.35)');
-      glow.addColorStop(1, 'rgba(250, 36, 60, 0)');
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, size, size);
-
-      // Stylized "T" + glowing gold "S" emblem
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-
-      // Silver "T"
-      const silverGrad = ctx.createLinearGradient(0, size * 0.2, 0, size * 0.68);
-      silverGrad.addColorStop(0, '#FFFFFF');
-      silverGrad.addColorStop(1, '#9CA3AF');
-      ctx.fillStyle = silverGrad;
-      ctx.font = `800 ${Math.round(size * 0.44)}px Inter, sans-serif`;
-      ctx.fillText('T', size * 0.37, size * 0.44);
-
-      // Gold-Amber "S"
-      const goldGrad = ctx.createLinearGradient(0, size * 0.22, 0, size * 0.72);
-      goldGrad.addColorStop(0, '#FDE047');
-      goldGrad.addColorStop(0.5, '#F59E0B');
-      goldGrad.addColorStop(1, '#FA243C');
-      ctx.fillStyle = goldGrad;
-      ctx.font = `800 ${Math.round(size * 0.44)}px Inter, sans-serif`;
-      ctx.fillText('S', size * 0.63, size * 0.48);
-
-      // Clean "TUNE-S" caption at bottom safe zone
-      ctx.fillStyle = '#F4F4F5';
-      ctx.font = `700 ${Math.round(size * 0.1)}px Inter, sans-serif`;
-      ctx.fillText('TUNE-S', size * 0.5, size * 0.8);
-
-      return canvas.toDataURL('image/png');
-    }
-
-    function setupTuneSPwaManifest() {
+    /**
+     * Progressive Web App (PWA) Manifest & Service Worker Setup
+     */
+    (function setupPWAInstallability() {
       try {
-        // Generate PNG previews for the modal UI only; NEVER overwrite <link rel="manifest"> with a data: URI
-        tuneSPng192 = renderTuneSPngIcon(192);
-        tuneSPng512 = renderTuneSPngIcon(512);
+        const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FA243C"/><stop offset="100%" stop-color="#FF5E7E"/></linearGradient></defs><rect width="512" height="512" rx="115" fill="url(#g)"/><path fill="#ffffff" d="M368 112L192 152v188.5c-11.8-6.8-25.4-11-40-11-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80V226l120-27.3v105.8c-11.8-6.8-25.4-11-40-11-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80V112z"/></svg>`;
+        const iconDataUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(iconSvg);
 
-        const previewEl = document.getElementById('install-modal-preview-icon');
-        if (previewEl && tuneSPng192) {
-          previewEl.src = tuneSPng192;
-        }
-
-        // Register real HTTPS Service Worker cleanly when hosted over HTTPS (e.g., GitHub Pages)
-        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-          navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
-        }
-      } catch (err) {
-        console.warn('PWA setup warning:', err);
-      }
-    }
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      deferredInstallPrompt = e;
-    });
-
-    function openInstallAppModal() {
-      const modal = document.getElementById('install-app-modal');
-      const previewEl = document.getElementById('install-modal-preview-icon');
-      if (previewEl) {
-        if (!tuneSPng192) tuneSPng192 = renderTuneSPngIcon(192);
-        previewEl.src = tuneSPng192;
-      }
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeInstallAppModal() {
-      const modal = document.getElementById('install-app-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    async function triggerNativePwaInstall() {
-      if (deferredInstallPrompt) {
-        deferredInstallPrompt.prompt();
-        const choice = await deferredInstallPrompt.userChoice;
-        if (choice && choice.outcome === 'accepted') {
-          showToast('Installing Tune-S...', 'info');
-          closeInstallAppModal();
-        }
-        deferredInstallPrompt = null;
-      } else {
-        showToast('Open Chrome ⋮ Menu → "Install and create shortcut" → "Create shortcut" or upload the 4 GitHub files first.', 'info');
-      }
-    }
-
-    function triggerFileDownload(filename, hrefUrl) {
-      const a = document.createElement('a');
-      a.href = hrefUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-
-    function downloadStaticManifestWebmanifest() {
-      const staticManifest = {
-        id: './',
-        name: 'Tune-S',
-        short_name: 'Tune-S',
-        description: 'Tune-S — South Indian Film Music Collection & Radio',
-        start_url: './',
-        scope: './',
-        display: 'standalone',
-        orientation: 'portrait',
-        background_color: '#0A0A0A',
-        theme_color: '#0A0A0A',
-        icons: [
-          {
-            src: './icon-192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any'
-          },
-          {
-            src: './icon-192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'maskable'
-          },
-          {
-            src: './icon-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any'
-          },
-          {
-            src: './icon-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable'
-          }
-        ]
-      };
-      const url = 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(staticManifest, null, 2));
-      triggerFileDownload('manifest.webmanifest', url);
-      showToast('Downloaded manifest.webmanifest', 'info');
-    }
-
-    function downloadStaticPngIcon192() {
-      const pngData = tuneSPng192 || renderTuneSPngIcon(192);
-      triggerFileDownload('icon-192.png', pngData);
-      showToast('Downloaded icon-192.png', 'info');
-    }
-
-    function downloadStaticPngIcon512() {
-      const pngData = tuneSPng512 || renderTuneSPngIcon(512);
-      triggerFileDownload('icon-512.png', pngData);
-      showToast('Downloaded icon-512.png', 'info');
-    }
-
-    function downloadStaticServiceWorker() {
-      const swCode = [
-        "const CACHE_NAME = 'tune-s-shell-v1';",
-        "const CORE_ASSETS = ['./', './manifest.webmanifest', './icon-192.png', './icon-512.png'];",
-        "",
-        "self.addEventListener('install', (event) => {",
-        "  event.waitUntil(",
-        "    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).catch(() => {})",
-        "  );",
-        "  self.skipWaiting();",
-        "});",
-        "",
-        "self.addEventListener('activate', (event) => {",
-        "  event.waitUntil(self.clients.claim());",
-        "});",
-        "",
-        "self.addEventListener('fetch', (event) => {",
-        "  if (event.request.method !== 'GET') return;",
-        "  event.respondWith(",
-        "    fetch(event.request).catch(() => caches.match(event.request))",
-        "  );",
-        "});",
-        ""
-      ].join('\n');
-      const url = 'data:application/javascript;charset=utf-8,' + encodeURIComponent(swCode);
-      triggerFileDownload('sw.js', url);
-      showToast('Downloaded sw.js', 'info');
-    }
-
-    function downloadAllGitHubPwaFiles() {
-      downloadStaticManifestWebmanifest();
-      setTimeout(() => downloadStaticPngIcon192(), 250);
-      setTimeout(() => downloadStaticPngIcon512(), 500);
-      setTimeout(() => downloadStaticServiceWorker(), 750);
-      showToast('Downloading all 4 GitHub Pages PWA files...', 'info');
-    }
-
-    function setupTuneSPwaManifest() {
-      try {
-        tuneSPng192 = renderTuneSPngIcon(192);
-        tuneSPng512 = renderTuneSPngIcon(512);
-
-        const favEl = document.getElementById('pwa-favicon');
-        const appleEl = document.getElementById('pwa-apple-icon');
-        const previewEl = document.getElementById('install-modal-preview-icon');
-        if (favEl) favEl.href = tuneSPng192;
-        if (appleEl) appleEl.href = tuneSPng512;
-        if (previewEl) previewEl.src = tuneSPng192;
+        const appleIconLink = document.createElement('link');
+        appleIconLink.rel = 'apple-touch-icon';
+        appleIconLink.href = iconDataUrl;
+        document.head.appendChild(appleIconLink);
 
         const baseUrl = window.location.href.split('#')[0].split('?')[0];
-        const scopeUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) || './';
+        const scopeUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) || '/';
 
         const manifestObj = {
-          name: 'Tune-S',
-          short_name: 'Tune-S',
-          description: 'Tune-S — South Indian Film Music Collection & Radio',
+          name: "Apple Music — Artist Collection",
+          short_name: "Apple Music",
+          description: "High-fidelity multi-artist streaming player with CarPlay & Android Auto support.",
           start_url: baseUrl,
           scope: scopeUrl,
-          display: 'standalone',
-          orientation: 'portrait',
-          background_color: '#0F0F0F',
-          theme_color: '#0F0F0F',
+          display: "standalone",
+          orientation: "any",
+          background_color: "#18181B",
+          theme_color: "#18181B",
           icons: [
-            {
-              src: tuneSPng192,
-              sizes: '192x192',
-              type: 'image/png',
-              purpose: 'any'
-            },
-            {
-              src: tuneSPng192,
-              sizes: '192x192',
-              type: 'image/png',
-              purpose: 'maskable'
-            },
-            {
-              src: tuneSPng512,
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any'
-            },
-            {
-              src: tuneSPng512,
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'maskable'
-            }
+            { src: iconDataUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+            { src: iconDataUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
           ]
         };
 
-        const manifestEl = document.getElementById('pwa-manifest');
-        if (manifestEl) {
-          manifestEl.href = 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifestObj));
-        }
-      } catch (err) {
-        console.warn('Manifest icon generation warning:', err);
-      }
-    }
+        const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+        const manifestUrl = URL.createObjectURL(manifestBlob);
+        const manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = manifestUrl;
+        document.head.appendChild(manifestLink);
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredInstallPrompt = e;
-    });
-
-    window.addEventListener('appinstalled', () => {
-      deferredInstallPrompt = null;
-      showToast('Tune-S installed! Check your Home Screen or App Drawer.', 'info');
-    });
-
-    function openInstallAppModal() {
-      const modal = document.getElementById('install-app-modal');
-      const previewEl = document.getElementById('install-modal-preview-icon');
-      if (previewEl && tuneSPng192) previewEl.src = tuneSPng192;
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeInstallAppModal() {
-      const modal = document.getElementById('install-app-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    async function triggerNativePwaInstall() {
-      if (deferredInstallPrompt) {
-        deferredInstallPrompt.prompt();
-        const choice = await deferredInstallPrompt.userChoice;
-        if (choice && choice.outcome === 'accepted') {
-          showToast('Installing Tune-S icon...', 'info');
-          closeInstallAppModal();
-        }
-        deferredInstallPrompt = null;
-      } else {
-        showToast('Tap Chrome ⋮ Menu → "Add to Home screen" → "Create shortcut" for instant icon.', 'info');
-      }
-    }
-
-    function triggerFileDownload(filename, hrefUrl) {
-      const a = document.createElement('a');
-      a.href = hrefUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-
-    function downloadStaticManifestJson() {
-      const staticManifest = {
-        name: 'Tune-S',
-        short_name: 'Tune-S',
-        start_url: './',
-        scope: './',
-        display: 'standalone',
-        background_color: '#0F0F0F',
-        theme_color: '#0F0F0F',
-        icons: [
-          { src: './icon-512.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-          { src: './icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
-        ]
-      };
-      const url = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(staticManifest, null, 2));
-      triggerFileDownload('manifest.json', url);
-      showToast('Downloaded manifest.json', 'info');
-    }
-
-    function downloadStaticPngIcon() {
-      const pngData = tuneSPng512 || renderTuneSPngIcon(512);
-      triggerFileDownload('icon-512.png', pngData);
-      showToast('Downloaded icon-512.png', 'info');
-    }
-
-    function downloadStaticServiceWorker() {
-      const swCode = `self.addEventListener('install', (e) => self.skipWaiting());\nself.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));\nself.addEventListener('fetch', (e) => {});\n`;
-      const url = 'data:application/javascript;charset=utf-8,' + encodeURIComponent(swCode);
-      triggerFileDownload('sw.js', url);
-      showToast('Downloaded sw.js', 'info');
-    }
-
-    function showBottomPlayerDock(show = true) {
-      const dock = document.getElementById('bottom-player-dock');
-      const scrollArea = document.getElementById('main-scroll-area');
-      if (!dock) return;
-      if (show) {
-        dock.classList.remove('hidden');
-        if (scrollArea) {
-          scrollArea.classList.remove('pb-24');
-          scrollArea.classList.add('pb-40');
-        }
-      } else {
-        dock.classList.add('hidden');
-        if (scrollArea) {
-          scrollArea.classList.remove('pb-40');
-          scrollArea.classList.add('pb-24');
-        }
-      }
-    }
-
-    function restoreLastPlayedState() {
-      const artEl = document.getElementById('player-art');
-      const titleEl = document.getElementById('player-title');
-      const artistEl = document.getElementById('player-artist');
-      const albumLinkBtn = document.getElementById('player-album-link');
-      const badge = document.getElementById('player-format-badge');
-
-      artEl.onerror = () => { artEl.src = FALLBACK_COVER_ART; };
-
-      try {
-        const raw = localStorage.getItem(LAST_PLAYED_STORAGE_KEY);
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (parsed && parsed.track) {
-            state.lastPlayedTrack = parsed.track;
-            if (Array.isArray(parsed.queue) && parsed.queue.length > 0) {
-              state.queue = parsed.queue;
-              state.currentIndex = typeof parsed.currentIndex === 'number' ? parsed.currentIndex : 0;
-            } else {
-              state.queue = [parsed.track];
-              state.currentIndex = 0;
-            }
-            artEl.src = parsed.track.cover || FALLBACK_COVER_ART;
-            titleEl.textContent = parsed.track.title || 'Select a song to play';
-            artistEl.textContent = `${parsed.track.artist} — ${parsed.track.albumTitle}`;
-            if (albumLinkBtn && parsed.track.albumTitle) {
-              albumLinkBtn.textContent = parsed.track.albumTitle;
-              albumLinkBtn.classList.remove('hidden');
-            }
-            if (badge) {
-              badge.textContent = parsed.track.formatBadge || 'LOSSLESS';
-              badge.classList.remove('hidden');
-            }
-            document.getElementById('player-add-playlist-btn').classList.remove('hidden');
-            showBottomPlayerDock(true);
-            return;
-          }
+        if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+          const swCode = `
+            const CACHE_NAME = 'apple-music-pwa-v1';
+            self.addEventListener('install', (e) => {
+              self.skipWaiting();
+            });
+            self.addEventListener('activate', (e) => {
+              e.waitUntil(self.clients.claim());
+            });
+            self.addEventListener('fetch', (e) => {
+              if (e.request.method !== 'GET') return;
+              const url = new URL(e.request.url);
+              if (url.hostname.includes('archive.org')) return;
+              e.respondWith(
+                fetch(e.request).catch(() => caches.match(e.request))
+              );
+            });
+          `;
+          const swBlob = new Blob([swCode], { type: 'application/javascript' });
+          const swUrl = URL.createObjectURL(swBlob);
+          navigator.serviceWorker.register(swUrl).catch(() => {});
         }
       } catch (e) {}
-
-      const firstAlbumWithCover = state.albums.find(a => a.cover && !a.cover.startsWith('data:image/svg'));
-      artEl.src = firstAlbumWithCover ? firstAlbumWithCover.cover : FALLBACK_COVER_ART;
-      showBottomPlayerDock(window.innerWidth >= 1024);
-    }
+    })();
 
     /**
      * Artist Registry & Artwork Configuration
@@ -1478,10 +918,7 @@
       isSeeking: false,
       queueOpen: false,
       collectionLoading: false,
-      pendingTrackForPlaylist: null,
-      wakeLockActive: false,
-      wakeLockSentinel: null,
-      carGuideTab: 'android'
+      pendingTrackForPlaylist: null
     };
 
     const audio = new Audio();
@@ -1494,42 +931,31 @@
     // ==========================================
     // Initialization
     // ==========================================
-    function initTuneSApp() {
-      try { loadAdminSession(); } catch (e) {}
-      try { loadArtworkCache(); } catch (e) {}
-      try { loadHiddenAlbums(); } catch (e) {}
-      try { loadAlbumsFromStorage(); } catch (e) {}
-      try { loadPlaylistsFromStorage(); } catch (e) {}
-
-      // Render UI immediately before async network or canvas operations
-      try {
-        renderSidebarArtists();
-        renderSidebarPlaylists();
-        renderSidebarAlbums();
-        renderCurrentView();
-      } catch (e) {
-        console.error('Initial render error:', e);
-      }
-
-      try { restoreLastPlayedState(); } catch (e) {}
-      try { setupAudioEvents(); } catch (e) {}
-      try { setupKeyboardShortcuts(); } catch (e) {}
-      try { setupTuneSPwaManifest(); } catch (e) {}
+    window.addEventListener('DOMContentLoaded', () => {
+      loadAdminSession();
+      loadArtworkCache();
+      loadHiddenAlbums();
+      loadAlbumsFromStorage();
+      loadPlaylistsFromStorage();
 
       // Hydrate any cached albums still using typographic SVG covers
-      try { hydrateMissingAlbumCoversInBackground(); } catch (e) {}
+      hydrateMissingAlbumCoversInBackground();
+
+      // Restore last played song artwork & metadata so player never appears empty on startup
+      restoreLastPlayedState();
 
       // Instantly fetch and build multi-album collections for all registered artists
       MULTI_ALBUM_COLLECTIONS.forEach(col => {
         fetchMultiAlbumCollection(col.identifier, col.defaultArtist, col.genre, col.artistId);
       });
-    }
 
-    if (document.readyState === 'loading') {
-      window.addEventListener('DOMContentLoaded', initTuneSApp);
-    } else {
-      initTuneSApp();
-    }
+      setupAudioEvents();
+      setupKeyboardShortcuts();
+      renderSidebarArtists();
+      renderSidebarPlaylists();
+      renderSidebarAlbums();
+      renderCurrentView();
+    });
 
     function saveLastPlayedState(track) {
       if (!track) return;
@@ -1541,6 +967,49 @@
           currentIndex: state.currentIndex
         }));
       } catch (e) {}
+    }
+
+    function restoreLastPlayedState() {
+      const artEl = document.getElementById('player-art');
+      const titleEl = document.getElementById('player-title');
+      const artistEl = document.getElementById('player-artist');
+      const albumLinkBtn = document.getElementById('player-album-link');
+      const badge = document.getElementById('player-format-badge');
+
+      artEl.onerror = () => { artEl.src = FALLBACK_COVER_ART; };
+
+      try {
+        const raw = localStorage.getItem(LAST_PLAYED_STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.track) {
+            state.lastPlayedTrack = parsed.track;
+            if (Array.isArray(parsed.queue) && parsed.queue.length > 0) {
+              state.queue = parsed.queue;
+              state.currentIndex = typeof parsed.currentIndex === 'number' ? parsed.currentIndex : 0;
+            } else {
+              state.queue = [parsed.track];
+              state.currentIndex = 0;
+            }
+            artEl.src = parsed.track.cover || FALLBACK_COVER_ART;
+            titleEl.textContent = parsed.track.title || 'Select a song to play';
+            artistEl.textContent = `${parsed.track.artist} — ${parsed.track.albumTitle}`;
+            if (albumLinkBtn && parsed.track.albumTitle) {
+              albumLinkBtn.textContent = parsed.track.albumTitle;
+              albumLinkBtn.classList.remove('hidden');
+            }
+            if (badge) {
+              badge.textContent = parsed.track.formatBadge || 'LOSSLESS';
+              badge.classList.remove('hidden');
+            }
+            document.getElementById('player-add-playlist-btn').classList.remove('hidden');
+            return;
+          }
+        }
+      } catch (e) {}
+
+      const firstAlbumWithCover = state.albums.find(a => a.cover && !a.cover.startsWith('data:image/svg'));
+      artEl.src = firstAlbumWithCover ? firstAlbumWithCover.cover : FALLBACK_COVER_ART;
     }
 
     // ==========================================
@@ -1767,7 +1236,7 @@
           <circle cx="340" cy="60" r="140" fill="${pal[2]}" opacity="0.22"/>
           <circle cx="60" cy="360" r="110" fill="${pal[2]}" opacity="0.16"/>
           <rect x="36" y="42" width="38" height="4" rx="2" fill="${pal[2]}"/>
-          <text x="36" y="72" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700" letter-spacing="2.5" opacity="0.7">TUNE-S DIGITAL MASTER</text>
+          <text x="36" y="72" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="700" letter-spacing="2.5" opacity="0.7">APPLE DIGITAL MASTER</text>
           <text x="36" y="225" fill="#FFFFFF" font-family="sans-serif" font-size="28" font-weight="800">${safeTitle}</text>
           <text x="36" y="352" fill="${pal[2]}" font-family="sans-serif" font-size="14" font-weight="800" letter-spacing="2">${safeArtist}</text>
         </svg>
@@ -2282,7 +1751,6 @@
       const track = getCurrentTrack();
       if (!track) return;
 
-      showBottomPlayerDock(true);
       saveLastPlayedState(track);
 
       document.getElementById('player-title').textContent = track.title;
@@ -2871,7 +2339,7 @@
     }
 
     function updateNavigationHighlights() {
-      const navIds = ['home', 'now-playing', 'search', 'radio', 'all-albums', 'all-songs', 'car-mode'];
+      const navIds = ['home', 'now-playing', 'search', 'radio', 'all-albums', 'all-songs'];
       navIds.forEach(id => {
         const el = document.getElementById(`nav-${id}`);
         if (!el) return;
@@ -2883,17 +2351,6 @@
           el.classList.add('text-neutral-300');
         }
       });
-
-      const headerCarBtn = document.getElementById('header-car-mode-btn');
-      if (headerCarBtn) {
-        if (state.currentView === 'car-mode') {
-          headerCarBtn.classList.add('bg-[#FA243C]', 'border-[#FA243C]');
-          headerCarBtn.classList.remove('bg-white/[0.08]', 'border-white/10');
-        } else {
-          headerCarBtn.classList.remove('bg-[#FA243C]', 'border-[#FA243C]');
-          headerCarBtn.classList.add('bg-white/[0.08]', 'border-white/10');
-        }
-      }
 
       const bottomTabs = {
         home: 'bottom-tab-home',
@@ -2935,13 +2392,6 @@
           <span class="text-white font-semibold">Now Playing</span>
         `;
         renderNowPlayingView(container);
-      } else if (state.currentView === 'car-mode') {
-        breadcrumb.innerHTML = `
-          <button onclick="switchView('home')" class="hover:text-white transition">Home</button>
-          <span class="mx-1.5 text-neutral-600">/</span>
-          <span class="text-white font-semibold">Car Mode</span>
-        `;
-        renderCarModeView(container);
       } else if (state.currentView === 'artist') {
         const matchedArtist = ARTISTS_DIRECTORY.find(a => a.id === state.selectedArtistId);
         const artistObj = matchedArtist || {
@@ -3309,250 +2759,6 @@
       resultsEl.innerHTML = html;
     }
 
-    // ==========================================
-    // Car Mode (CarPlay / Android Auto Split-Screen UI) & Wake Lock
-    // ==========================================
-    async function toggleScreenWakeLock() {
-      if (!('wakeLock' in navigator)) {
-        showToast('Screen Wake Lock is not supported on this browser.', 'error');
-        return;
-      }
-      try {
-        if (state.wakeLockActive && state.wakeLockSentinel) {
-          await state.wakeLockSentinel.release();
-          state.wakeLockSentinel = null;
-          state.wakeLockActive = false;
-          showToast('Keep Screen Awake: Off', 'info');
-        } else {
-          state.wakeLockSentinel = await navigator.wakeLock.request('screen');
-          state.wakeLockActive = true;
-          state.wakeLockSentinel.addEventListener('release', () => {
-            state.wakeLockActive = false;
-            if (state.currentView === 'car-mode') renderCurrentView();
-          });
-          showToast('Keep Screen Awake: On for Driving', 'info');
-        }
-      } catch (err) {
-        showToast('Unable to lock screen awake.', 'error');
-      }
-      if (state.currentView === 'car-mode') renderCurrentView();
-    }
-
-    function renderCarModeView(container) {
-      const track = getCurrentTrack() || state.lastPlayedTrack;
-      const sortedArtists = [...ARTISTS_DIRECTORY].sort((a, b) => a.name.localeCompare(b.name));
-      const isAllRadioActive = state.isRadioMode && state.activeRadioArtistId === 'all';
-
-      container.innerHTML = `
-        <div class="max-w-6xl mx-auto space-y-6">
-          <!-- Car Mode Top Bar -->
-          <div class="flex flex-wrap items-center justify-between gap-3 bg-[#222227] border border-white/10 rounded-2xl p-4">
-            <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-2xl bg-[#FA243C]/20 text-[#FA243C] flex items-center justify-center shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11M4 11h16a1 1 0 011 1v5a1 1 0 01-1 1h-1a1 1 0 01-1-1v-1H6v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-5a1 1 0 011-1zm3 3h.01M17 14h.01"/>
-                </svg>
-              </div>
-              <div>
-                <h1 class="text-lg sm:text-xl font-extrabold text-white">Car Dashboard Mode</h1>
-                <p class="text-xs text-neutral-400">Large driver-friendly controls • Media Session & Bluetooth head-unit sync active</p>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-2.5">
-              <button onclick="toggleScreenWakeLock()"
-                class="px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 border transition ${state.wakeLockActive ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300' : 'bg-white/[0.07] hover:bg-white/[0.12] border-white/10 text-white'}">
-                <span class="w-2 h-2 rounded-full ${state.wakeLockActive ? 'bg-emerald-400 animate-pulse' : 'bg-neutral-500'}"></span>
-                <span>${state.wakeLockActive ? 'Screen Awake: ON' : 'Keep Screen Awake'}</span>
-              </button>
-
-              <button onclick="openCarGuideModal()"
-                class="px-4 py-2.5 rounded-xl bg-[#FA243C]/15 hover:bg-[#FA243C]/25 border border-[#FA243C]/35 text-[#FA243C] text-xs font-bold flex items-center gap-1.5 transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span>CarPlay & Android Auto Setup</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- CarPlay / Android Auto Split-Screen Layout -->
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-            <!-- Left Panel: Oversized Now Playing Card -->
-            <div class="lg:col-span-5 bg-gradient-to-b from-[#28282E] to-[#1C1C20] border border-white/10 rounded-3xl p-6 flex flex-col justify-between gap-6 shadow-2xl">
-              <div class="flex items-center gap-4">
-                <img src="${track?.cover || FALLBACK_COVER_ART}" onerror="this.src='${FALLBACK_COVER_ART}'"
-                  class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover object-top border border-white/15 shadow-xl shrink-0 bg-neutral-900" />
-                <div class="min-w-0 flex-1">
-                  <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FA243C]/20 text-[#FA243C] text-[10px] font-bold uppercase tracking-wider mb-1.5">
-                    ${state.isRadioMode ? 'Live Artist Radio' : 'Now Playing'}
-                  </span>
-                  <h2 class="text-xl sm:text-2xl font-extrabold text-white line-clamp-2 leading-tight">
-                    ${escapeHtml(track?.title || 'Tap Any Radio Below')}
-                  </h2>
-                  <p class="text-sm font-semibold text-neutral-300 truncate mt-1">
-                    ${escapeHtml(track?.artist || '13 South Indian Composers')}
-                  </p>
-                  <p class="text-xs text-neutral-400 truncate mt-0.5">
-                    ${escapeHtml(track?.albumTitle || 'Ready for Bluetooth & USB Audio')}
-                  </p>
-                </div>
-              </div>
-
-              <!-- Oversized Driver Transport Buttons -->
-              <div class="grid grid-cols-3 gap-3 pt-2">
-                <button onclick="prevTrack()" aria-label="Previous Track"
-                  class="h-20 rounded-2xl bg-white/[0.08] hover:bg-white/[0.15] active:scale-95 text-white flex flex-col items-center justify-center gap-1 transition">
-                  <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-300">Prev</span>
-                </button>
-
-                <button onclick="togglePlayPause()" aria-label="Play or Pause"
-                  class="h-20 rounded-2xl bg-[#FA243C] hover:bg-[#E01E34] active:scale-95 text-white flex flex-col items-center justify-center gap-1 shadow-xl shadow-[#FA243C]/30 transition">
-                  ${state.isPlaying
-                    ? `<svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg><span class="text-[11px] font-bold uppercase tracking-wider">Pause</span>`
-                    : `<svg class="w-9 h-9 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span class="text-[11px] font-bold uppercase tracking-wider">Play</span>`
-                  }
-                </button>
-
-                <button onclick="nextTrack()" aria-label="Next Track"
-                  class="h-20 rounded-2xl bg-white/[0.08] hover:bg-white/[0.15] active:scale-95 text-white flex flex-col items-center justify-center gap-1 transition">
-                  <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-                  <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-300">Next</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Right Panel: One-Tap Artist Radio Stations (Alphabetical) -->
-            <div class="lg:col-span-7 bg-[#222227] border border-white/10 rounded-3xl p-5 sm:p-6 space-y-4">
-              <div class="flex items-center justify-between">
-                <h2 class="text-base sm:text-lg font-extrabold text-white">One-Tap Radio Stations</h2>
-                <span class="text-xs text-neutral-400">${sortedArtists.length + 1} Stations</span>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[380px] overflow-y-auto pr-1">
-                <!-- All Artists Radio Tile -->
-                <button onclick="startRadioShuffle(false)"
-                  class="min-h-[68px] px-4 py-3 rounded-2xl text-left flex items-center justify-between gap-3 transition bg-[#FA243C] hover:bg-[#E01E34] text-white shadow-lg">
-                  <div class="min-w-0">
-                    <div class="text-sm font-extrabold truncate">All Artists Radio</div>
-                    <div class="text-[11px] text-white/85 truncate">Shuffle All 13 Composers</div>
-                  </div>
-                  ${isAllRadioActive
-                    ? renderEqualizerBars('bg-white')
-                    : `<svg class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`
-                  }
-                </button>
-
-                <!-- Individual Artist Radio Tiles -->
-                ${sortedArtists.map(ar => {
-                  const isStationActive = state.isRadioMode && state.activeRadioArtistId === ar.id;
-                  return `
-                    <button onclick="startRadioShuffle(false, '${ar.id}')"
-                      class="min-h-[68px] px-4 py-3 rounded-2xl text-left flex items-center justify-between gap-3 border transition ${
-                        isStationActive
-                          ? 'bg-[#FA243C] border-[#FA243C] text-white shadow-lg'
-                          : 'bg-white/[0.06] hover:bg-white/[0.12] border-white/10 text-white'
-                      }">
-                      <div class="flex items-center gap-3 min-w-0">
-                        <img src="${ar.cover}" onerror="this.src='${FALLBACK_COVER_ART}'" class="w-10 h-10 rounded-full object-cover border border-white/15 shrink-0" />
-                        <div class="min-w-0">
-                          <div class="text-sm font-bold truncate">${escapeHtml(ar.name)}</div>
-                          <div class="text-[11px] ${isStationActive ? 'text-white/90' : 'text-neutral-400'} truncate">
-                            ${isStationActive ? (state.isPlaying ? 'Playing Radio' : 'Paused') : 'Tap for Radio'}
-                          </div>
-                        </div>
-                      </div>
-                      ${isStationActive
-                        ? renderEqualizerBars('bg-white')
-                        : `<svg class="w-5 h-5 text-neutral-300 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`
-                      }
-                    </button>
-                  `;
-                }).join('')}
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    const CAR_WRAPPER_SNIPPETS = {
-      android: `<!-- 1. AndroidManifest.xml (Inside <application>) -->
-<meta-data
-    android:name="com.google.android.gms.car.application"
-    android:resource="@xml/automotive_app_desc" />
-
-<service
-    android:name=".MusicMediaBrowserService"
-    android:exported="true">
-    <intent-filter>
-        <action android:name="android.media.browse.MediaBrowserService" />
-    </intent-filter>
-</service>
-
-<!-- 2. res/xml/automotive_app_desc.xml -->
-<automotiveApp>
-    <uses name="media" />
-</automotiveApp>`,
-      carplay: `// 1. Info.plist — Add Car Audio Scene Configuration
-// Entitlement required: com.apple.developer.carplay-audio
-<key>UIApplicationSceneManifest</key>
-<dict>
-    <key>UISceneConfigurations</key>
-    <dict>
-        <key>CPTemplateApplicationSceneSessionRoleApplication</key>
-        <array>
-            <dict>
-                <key>UISceneClassName</key>
-                <string>CPTemplateApplicationScene</string>
-                <key>UISceneDelegateClassName</key>
-                <string>$(PRODUCT_MODULE_NAME).CarSceneDelegate</string>
-            </dict>
-        </array>
-    </dict>
-</dict>`
-    };
-
-    function openCarGuideModal() {
-      const modal = document.getElementById('car-guide-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      switchCarGuideTab(state.carGuideTab || 'android');
-    }
-
-    function closeCarGuideModal() {
-      const modal = document.getElementById('car-guide-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    }
-
-    function switchCarGuideTab(tab) {
-      state.carGuideTab = tab;
-      const btnAndroid = document.getElementById('car-tab-android');
-      const btnCarplay = document.getElementById('car-tab-carplay');
-      const codeEl = document.getElementById('car-wrapper-code');
-      if (btnAndroid && btnCarplay) {
-        btnAndroid.className = `px-3.5 py-1.5 rounded-full text-xs font-bold transition ${tab === 'android' ? 'bg-[#FA243C] text-white' : 'bg-white/10 text-neutral-300 hover:text-white'}`;
-        btnCarplay.className = `px-3.5 py-1.5 rounded-full text-xs font-bold transition ${tab === 'carplay' ? 'bg-[#FA243C] text-white' : 'bg-white/10 text-neutral-300 hover:text-white'}`;
-      }
-      if (codeEl) {
-        codeEl.textContent = CAR_WRAPPER_SNIPPETS[tab];
-      }
-    }
-
-    function copyCarWrapperSnippet() {
-      const codeEl = document.getElementById('car-wrapper-code');
-      if (!codeEl) return;
-      const temp = document.createElement('textarea');
-      temp.value = codeEl.textContent;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand('copy');
-      document.body.removeChild(temp);
-      showToast('In-car wrapper config copied!', 'info');
-    }
-
     function renderNowPlayingView(container) {
       const track = getCurrentTrack() || state.lastPlayedTrack;
       const current = audio.currentTime || 0;
@@ -3687,7 +2893,7 @@
             <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
           </div>
           <div>
-            <h1 class="text-3xl font-extrabold text-white">Tune-S Artist Radio</h1>
+            <h1 class="text-3xl font-extrabold text-white">Apple Music Artist Radio</h1>
             <p class="text-sm text-neutral-400 mt-2">Shuffling ${state.albums.reduce((acc, a) => acc + (a.tracks?.length || 0), 0)} songs across A.R. Rahman, Anirudh Ravichander, Bharadwaj, D. Imman, Darbuka Siva, Deva, Harris Jayaraj, Ilayaraja, Sai Abhyankkar, Santhosh Narayanan, Sean Roldan, Vidyasagar & Yuvan Shankar Raja.</p>
           </div>
           <div class="flex flex-wrap items-center justify-center gap-3">
@@ -3717,13 +2923,13 @@
         <div class="max-w-6xl mx-auto space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
-              <div class="text-xs font-bold uppercase tracking-wider text-[#FA243C] mb-1">Curated Selection</div>
-              <h1 class="text-3xl font-extrabold text-white">Featured Albums</h1>
+              <div class="text-xs font-bold uppercase tracking-wider text-[#FA243C] mb-1">2026 Releases</div>
+              <h1 class="text-3xl font-extrabold text-white">New & Latest Albums</h1>
               <p class="text-xs text-neutral-400 mt-1">${displayList.length} albums available</p>
             </div>
             <button onclick="startRadioShuffle(false)" class="px-5 py-2 rounded-full bg-[#FA243C] hover:bg-[#E01E34] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow transition self-start">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              <span>Shuffle Featured</span>
+              <span>Shuffle New Releases</span>
             </button>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
@@ -3758,7 +2964,7 @@
               <div>
                 <div class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#FA243C] mb-1">
                   <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                  <span>Tune-S Artist Directory</span>
+                  <span>Apple Music Artist Directory</span>
                 </div>
                 <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Featured Artists</h1>
                 <p class="text-xs sm:text-sm text-neutral-400 mt-1">
@@ -3855,11 +3061,11 @@
             `}
           </section>
 
-          <!-- Featured Albums Across All Artists -->
+          <!-- Latest Albums Across All Artists -->
           <section>
             <div class="flex items-center justify-between mb-4">
               <button onclick="switchView('all-albums')" class="text-lg sm:text-xl font-bold text-white hover:text-[#FA243C] flex items-center gap-1 transition">
-                <span>Featured Albums</span>
+                <span>Latest Albums</span>
                 <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
               </button>
               <button onclick="switchView('all-albums')" class="text-xs font-semibold text-[#FA243C] hover:underline">
@@ -3892,7 +3098,7 @@
     function renderArtistDetailView(container, artist) {
       const artistAlbums = state.albums.filter(a => a.artistId === artist.id || a.artist.toLowerCase() === artist.name.toLowerCase());
       const artistTracks = artistAlbums.flatMap(a => a.tracks || []);
-      const topPickAlbum = artistAlbums[0];
+      const latestAlbum = artistAlbums[0];
       const isRadioActive = state.isRadioMode && state.activeRadioArtistId === artist.id;
 
       const topSongs = [];
@@ -3935,26 +3141,26 @@
             </div>
           </section>
 
-          <!-- Top Pick + Top Songs -->
-          ${topPickAlbum ? `
+          <!-- Latest Release + Top Songs -->
+          ${latestAlbum ? `
             <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div class="lg:col-span-5">
-                <h2 class="text-lg font-bold text-white mb-3.5">Top Pick</h2>
-                <div onclick="switchView('album', '${topPickAlbum.id.replace(/'/g, "\\'")}')"
+                <h2 class="text-lg font-bold text-white mb-3.5">Latest Release</h2>
+                <div onclick="switchView('album', '${latestAlbum.id.replace(/'/g, "\\'")}')"
                   class="group flex items-center gap-4 p-3.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.07] cursor-pointer transition">
                   <div class="relative w-32 h-32 sm:w-36 sm:h-36 rounded-xl overflow-hidden bg-neutral-900 shadow-lg shrink-0 border border-white/10">
-                    <img src="${topPickAlbum.cover}" onerror="this.src='${FALLBACK_COVER_ART}'" alt="${escapeHtml(topPickAlbum.title)}"
+                    <img src="${latestAlbum.cover}" onerror="this.src='${FALLBACK_COVER_ART}'" alt="${escapeHtml(latestAlbum.title)}"
                       class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" />
-                    <button onclick="event.stopPropagation(); playAlbum('${topPickAlbum.id.replace(/'/g, "\\'")}', 0, false)"
+                    <button onclick="event.stopPropagation(); playAlbum('${latestAlbum.id.replace(/'/g, "\\'")}', 0, false)"
                       class="absolute bottom-2.5 right-2.5 w-10 h-10 rounded-full bg-[#FA243C] text-white flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transition">
                       <svg class="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </button>
                   </div>
                   <div class="min-w-0 flex-1">
-                    <div class="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">${escapeHtml(topPickAlbum.year || 'Featured')}</div>
-                    <div class="text-base sm:text-lg font-bold text-white leading-snug mt-0.5 line-clamp-2">${escapeHtml(topPickAlbum.title)}</div>
-                    <div class="text-xs text-neutral-400 mt-1.5">${topPickAlbum.tracks.length ? `${topPickAlbum.tracks.length} songs` : 'Loading songs...'}</div>
-                    <button onclick="event.stopPropagation(); playAlbum('${topPickAlbum.id.replace(/'/g, "\\'")}', 0, false)"
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">${escapeHtml(latestAlbum.year || 'Latest')}</div>
+                    <div class="text-base sm:text-lg font-bold text-white leading-snug mt-0.5 line-clamp-2">${escapeHtml(latestAlbum.title)}</div>
+                    <div class="text-xs text-neutral-400 mt-1.5">${latestAlbum.tracks.length ? `${latestAlbum.tracks.length} songs` : 'Loading songs...'}</div>
+                    <button onclick="event.stopPropagation(); playAlbum('${latestAlbum.id.replace(/'/g, "\\'")}', 0, false)"
                       class="mt-3 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-[#FA243C] text-white text-xs font-semibold inline-flex items-center gap-1.5 transition">
                       <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                       <span>Play</span>
@@ -4218,7 +3424,7 @@
             <div class="flex-1 text-center md:text-left min-w-0">
               <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/[0.07] border border-white/10 text-[10px] font-bold uppercase tracking-wider text-neutral-300 mb-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-[#FA243C]"></span>
-                <span>Tune-S Digital Master • Lossless</span>
+                <span>Apple Digital Master • Lossless</span>
               </div>
 
               <h1 class="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-white leading-tight">
