@@ -10,9 +10,9 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="application-name" content="Tune-S" />
   <title>Tune-S — South Indian Film Music Collection</title>
-  <link id="pwa-favicon" rel="icon" type="image/png" href="" />
-  <link id="pwa-apple-icon" rel="apple-touch-icon" href="" />
-  <link id="pwa-manifest" rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Tune-S%22%2C%22short_name%22%3A%22Tune-S%22%2C%22start_url%22%3A%22.%2F%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230F0F0F%22%2C%22theme_color%22%3A%22%230F0F0F%22%7D" />
+  <link id="pwa-favicon" rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+  <link id="pwa-apple-icon" rel="apple-touch-icon" sizes="180x180" href="./icon-192.png" />
+  <link id="pwa-manifest" rel="manifest" href="./manifest.webmanifest" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -718,8 +718,8 @@
         <div class="flex items-center gap-3">
           <img id="install-modal-preview-icon" src="" alt="Tune-S Icon" class="w-10 h-10 rounded-xl border border-white/15 shadow-md bg-neutral-900" />
           <div>
-            <h3 class="text-base sm:text-lg font-bold text-white">Install Tune-S on Phone</h3>
-            <p class="text-[11px] text-neutral-400">Fix missing Android Home Screen / App Drawer icon</p>
+            <h3 class="text-base sm:text-lg font-bold text-white">Install Tune-S on Android</h3>
+            <p class="text-[11px] text-neutral-400">GitHub Pages WebAPK Packager & Home Screen Icon</p>
           </div>
         </div>
         <button onclick="closeInstallAppModal()" class="text-neutral-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10">
@@ -728,44 +728,62 @@
       </div>
 
       <div class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-neutral-300 leading-relaxed">
-        <div class="flex flex-wrap items-center gap-2.5">
-          <button id="native-install-trigger-btn" onclick="triggerNativePwaInstall()"
-            class="px-5 py-2.5 rounded-full bg-[#FA243C] hover:bg-[#E01E34] text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-[#FA243C]/25 transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+        <!-- Root cause explanation -->
+        <div class="rounded-2xl bg-amber-500/10 border border-amber-500/25 p-4 space-y-1.5">
+          <div class="text-amber-400 font-bold text-xs uppercase tracking-wider">Why the icon disappeared after 1 second</div>
+          <p class="text-xs text-neutral-300">
+            Android Chrome's WebAPK server cannot read inline <code class="text-neutral-100">data:</code> manifests—it requires real HTTPS files (<code class="text-neutral-100">manifest.webmanifest</code>, <code class="text-neutral-100">icon-192.png</code>, <code class="text-neutral-100">icon-512.png</code>, and <code class="text-neutral-100">sw.js</code>) committed to your <code class="text-neutral-100">hummingjays.github.io</code> repository alongside <code class="text-neutral-100">index.html</code>.
+          </p>
+        </div>
+
+        <!-- Primary 1-Tap GitHub Pages PWA Packager -->
+        <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-4 space-y-3">
+          <div class="flex items-center justify-between gap-2">
+            <div class="text-white font-bold text-xs uppercase tracking-wider">Step 1: Add These 4 Files to GitHub</div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">Permanent App Drawer Icon</span>
+          </div>
+          <p class="text-xs text-neutral-400">
+            Download all 4 static PWA files below and upload them to the exact same folder as your HTML file on GitHub Pages:
+          </p>
+
+          <button onclick="downloadAllGitHubPwaFiles()"
+            class="w-full py-3 px-4 rounded-xl bg-[#FA243C] hover:bg-[#E01E34] active:scale-[0.99] text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FA243C]/25 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
             </svg>
-            <span>Install Tune-S App Now</span>
+            <span>Download All 4 PWA Files for GitHub</span>
           </button>
-        </div>
 
-        <div class="rounded-2xl bg-amber-500/10 border border-amber-500/25 p-4 space-y-1.5">
-          <div class="text-amber-400 font-bold text-xs uppercase tracking-wider">Why the icon didn't appear earlier</div>
-          <p class="text-xs text-neutral-300">
-            1. Android Chrome caches the previous WebAPK name/icon per domain. Go to <strong>Android Settings → Apps → See all apps</strong>, uninstall any old cached web app entry if present, then refresh this page.<br/>
-            2. If Chrome's <em>"Install app"</em> WebAPK minting stalls on a single-file page, tap Chrome's <strong>⋮ Menu → Add to Home screen → Create shortcut</strong> to place the <strong>Tune-S</strong> icon immediately on your Home Screen.
-          </p>
-        </div>
-
-        <div class="rounded-2xl bg-white/[0.04] border border-white/10 p-4 space-y-2.5">
-          <div class="text-white font-bold text-xs uppercase tracking-wider">GitHub Pages Static WebAPK Bundle (Recommended)</div>
-          <p class="text-xs text-neutral-400">
-            For 100% reliable Android WebAPK app-drawer icons on <code class="text-neutral-200">hummingjays.github.io</code>, download these 3 static files and upload them to the same folder as your HTML file:
-          </p>
-          <div class="flex flex-wrap gap-2 pt-1">
-            <button onclick="downloadStaticManifestJson()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition">
-              1. Download manifest.json
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="downloadStaticManifestWebmanifest()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
+              1. manifest.webmanifest
             </button>
-            <button onclick="downloadStaticPngIcon()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition">
-              2. Download icon-512.png
+            <button onclick="downloadStaticPngIcon192()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
+              2. icon-192.png
             </button>
-            <button onclick="downloadStaticServiceWorker()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition">
-              3. Download sw.js
+            <button onclick="downloadStaticPngIcon512()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
+              3. icon-512.png
+            </button>
+            <button onclick="downloadStaticServiceWorker()" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold text-left truncate transition">
+              4. sw.js
             </button>
           </div>
         </div>
+
+        <!-- Instant No-Upload Chrome Shortcut Tip -->
+        <div class="rounded-2xl bg-sky-500/10 border border-sky-500/25 p-4 space-y-1.5">
+          <div class="text-sky-400 font-bold text-xs uppercase tracking-wider">Use Chrome Shortcut Right Now (No Upload Needed)</div>
+          <p class="text-xs text-neutral-300">
+            In Chrome's <strong>⋮ Menu → Install and create shortcut</strong> sheet, tap the second option <strong>"Create shortcut (Shortcuts open in Chrome)"</strong> to place a permanent <strong>Tune-S</strong> icon on your Home Screen right away. Once you upload the 4 files above to GitHub, tapping <strong>"Install"</strong> will install a standalone App Drawer WebAPK!
+          </p>
+        </div>
       </div>
 
-      <div class="px-6 py-3.5 border-t border-white/10 flex justify-end shrink-0">
+      <div class="px-6 py-3.5 border-t border-white/10 flex items-center justify-between gap-2 shrink-0">
+        <button id="native-install-trigger-btn" onclick="triggerNativePwaInstall()"
+          class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition">
+          Trigger Chrome Install Prompt
+        </button>
         <button onclick="closeInstallAppModal()" class="px-5 py-2 rounded-full bg-[#FA243C] hover:bg-[#E01E34] text-white text-xs font-bold transition">
           Done
         </button>
@@ -775,7 +793,7 @@
 
   <script>
     // ==========================================
-    // Android Chrome WebAPK & PNG App Icon Generator
+    // Android Chrome WebAPK & GitHub Pages PWA Packager
     // ==========================================
     let tuneSPng192 = '';
     let tuneSPng512 = '';
@@ -840,6 +858,163 @@
       ctx.fillText('TUNE-S', size * 0.5, size * 0.8);
 
       return canvas.toDataURL('image/png');
+    }
+
+    function setupTuneSPwaManifest() {
+      try {
+        // Generate PNG previews for the modal UI only; NEVER overwrite <link rel="manifest"> with a data: URI
+        tuneSPng192 = renderTuneSPngIcon(192);
+        tuneSPng512 = renderTuneSPngIcon(512);
+
+        const previewEl = document.getElementById('install-modal-preview-icon');
+        if (previewEl && tuneSPng192) {
+          previewEl.src = tuneSPng192;
+        }
+
+        // Register real HTTPS Service Worker cleanly when hosted over HTTPS (e.g., GitHub Pages)
+        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+          navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
+        }
+      } catch (err) {
+        console.warn('PWA setup warning:', err);
+      }
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      deferredInstallPrompt = e;
+    });
+
+    function openInstallAppModal() {
+      const modal = document.getElementById('install-app-modal');
+      const previewEl = document.getElementById('install-modal-preview-icon');
+      if (previewEl) {
+        if (!tuneSPng192) tuneSPng192 = renderTuneSPngIcon(192);
+        previewEl.src = tuneSPng192;
+      }
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeInstallAppModal() {
+      const modal = document.getElementById('install-app-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    async function triggerNativePwaInstall() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const choice = await deferredInstallPrompt.userChoice;
+        if (choice && choice.outcome === 'accepted') {
+          showToast('Installing Tune-S...', 'info');
+          closeInstallAppModal();
+        }
+        deferredInstallPrompt = null;
+      } else {
+        showToast('Open Chrome ⋮ Menu → "Install and create shortcut" → "Create shortcut" or upload the 4 GitHub files first.', 'info');
+      }
+    }
+
+    function triggerFileDownload(filename, hrefUrl) {
+      const a = document.createElement('a');
+      a.href = hrefUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function downloadStaticManifestWebmanifest() {
+      const staticManifest = {
+        id: './',
+        name: 'Tune-S',
+        short_name: 'Tune-S',
+        description: 'Tune-S — South Indian Film Music Collection & Radio',
+        start_url: './',
+        scope: './',
+        display: 'standalone',
+        orientation: 'portrait',
+        background_color: '#0A0A0A',
+        theme_color: '#0A0A0A',
+        icons: [
+          {
+            src: './icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any'
+          },
+          {
+            src: './icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable'
+          },
+          {
+            src: './icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any'
+          },
+          {
+            src: './icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable'
+          }
+        ]
+      };
+      const url = 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(staticManifest, null, 2));
+      triggerFileDownload('manifest.webmanifest', url);
+      showToast('Downloaded manifest.webmanifest', 'info');
+    }
+
+    function downloadStaticPngIcon192() {
+      const pngData = tuneSPng192 || renderTuneSPngIcon(192);
+      triggerFileDownload('icon-192.png', pngData);
+      showToast('Downloaded icon-192.png', 'info');
+    }
+
+    function downloadStaticPngIcon512() {
+      const pngData = tuneSPng512 || renderTuneSPngIcon(512);
+      triggerFileDownload('icon-512.png', pngData);
+      showToast('Downloaded icon-512.png', 'info');
+    }
+
+    function downloadStaticServiceWorker() {
+      const swCode = [
+        "const CACHE_NAME = 'tune-s-shell-v1';",
+        "const CORE_ASSETS = ['./', './manifest.webmanifest', './icon-192.png', './icon-512.png'];",
+        "",
+        "self.addEventListener('install', (event) => {",
+        "  event.waitUntil(",
+        "    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).catch(() => {})",
+        "  );",
+        "  self.skipWaiting();",
+        "});",
+        "",
+        "self.addEventListener('activate', (event) => {",
+        "  event.waitUntil(self.clients.claim());",
+        "});",
+        "",
+        "self.addEventListener('fetch', (event) => {",
+        "  if (event.request.method !== 'GET') return;",
+        "  event.respondWith(",
+        "    fetch(event.request).catch(() => caches.match(event.request))",
+        "  );",
+        "});",
+        ""
+      ].join('\n');
+      const url = 'data:application/javascript;charset=utf-8,' + encodeURIComponent(swCode);
+      triggerFileDownload('sw.js', url);
+      showToast('Downloaded sw.js', 'info');
+    }
+
+    function downloadAllGitHubPwaFiles() {
+      downloadStaticManifestWebmanifest();
+      setTimeout(() => downloadStaticPngIcon192(), 250);
+      setTimeout(() => downloadStaticPngIcon512(), 500);
+      setTimeout(() => downloadStaticServiceWorker(), 750);
+      showToast('Downloading all 4 GitHub Pages PWA files...', 'info');
     }
 
     function setupTuneSPwaManifest() {
