@@ -2,13 +2,16 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#18181B" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Apple Music" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="application-name" content="Apple Music" />
+  <link id="pwa-favicon" rel="icon" type="image/png" />
+  <link id="pwa-apple-icon" rel="apple-touch-icon" />
+  <link id="pwa-manifest-link" rel="manifest" />
   <title>Music — A.R. Rahman, Anirudh Ravichander, Bharadwaj, D. Imman, Darbuka Siva, Deva, Harris Jayaraj, Ilayaraja, Sai Abhyankkar, Santhosh Narayanan, Sean Roldan, Vidyasagar & Yuvan Shankar Raja Collection</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,8 +26,18 @@
     body {
       background-color: #18181B;
       color: #F4F4F5;
+      height: 100vh;
+      height: 100dvh;
       overflow: hidden;
       user-select: none;
+    }
+
+    /* Bottom Navigation & Mini-Player Flush Anchoring for Mobile Browsers */
+    .apple-bottom-nav {
+      bottom: calc(4px + env(safe-area-inset-bottom, 0px));
+    }
+    .apple-player-dock {
+      margin-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
     }
 
     /* Custom Scrollbars */
@@ -98,7 +111,7 @@
     }
   </style>
 </head>
-<body class="h-screen w-screen flex flex-col bg-[#18181B] text-zinc-100">
+<body class="h-[100dvh] w-screen flex flex-col bg-[#18181B] text-zinc-100">
 
   <!-- Main Workspace Wrapper -->
   <div class="flex-1 flex min-h-0 overflow-hidden relative">
@@ -127,6 +140,13 @@
 
       <!-- Primary Navigation -->
       <div class="px-3 space-y-0.5">
+        <button id="sidebar-install-btn" onclick="triggerPWAInstall()" class="w-full flex items-center gap-3 px-3 py-2 mb-1 rounded-lg text-sm font-semibold transition text-[#FA243C] bg-[#FA243C]/12 hover:bg-[#FA243C]/20 border border-[#FA243C]/25">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          <span>Install App</span>
+        </button>
+
         <button id="nav-home" onclick="switchView('home')" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition text-white bg-white/10">
           <svg class="w-4 h-4 text-[#FA243C]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
@@ -225,6 +245,14 @@
         </div>
 
         <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          <!-- Install App / Add Home Screen Shortcut Button -->
+          <button id="header-install-btn" onclick="triggerPWAInstall()" title="Install App or Add Home Screen Shortcut" class="px-3 py-1.5 rounded-full bg-[#FA243C]/15 hover:bg-[#FA243C]/25 border border-[#FA243C]/35 text-xs font-semibold text-[#FA243C] flex items-center gap-1.5 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            <span>Install App</span>
+          </button>
+
           <!-- Admin Add Album Button (Visible only when Admin is signed in) -->
           <button id="header-add-album-btn" onclick="openAddAlbumModal()" class="hidden px-3 py-1.5 rounded-full bg-[#FA243C]/15 hover:bg-[#FA243C]/25 border border-[#FA243C]/30 text-xs font-semibold text-[#FA243C] flex items-center gap-1.5 transition">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
@@ -257,13 +285,13 @@
       </header>
 
       <!-- Scrollable Viewport -->
-      <div id="main-scroll-area" class="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-10 pt-6 pb-32">
+      <div id="main-scroll-area" class="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-10 pt-6 pb-40">
         <!-- Dynamic Content Rendered Here -->
       </div>
 
-      <!-- iOS Floating Bottom Tab Bar -->
-      <nav aria-label="Bottom Navigation" class="pointer-events-none fixed bottom-[86px] sm:bottom-[92px] left-0 right-0 lg:left-64 z-30 flex justify-center px-3">
-        <div class="pointer-events-auto w-full max-w-[440px] h-[60px] rounded-full bg-[#242428]/90 backdrop-blur-2xl border border-white/[0.12] shadow-[0_12px_36px_rgba(0,0,0,0.65)] grid grid-cols-5 items-center px-1.5">
+      <!-- iOS Floating Bottom Tab Bar Anchored at the Very Bottom Edge -->
+      <nav aria-label="Bottom Navigation" class="apple-bottom-nav pointer-events-none fixed left-0 right-0 lg:left-64 z-50 flex justify-center px-3">
+        <div class="pointer-events-auto w-full max-w-[440px] h-[60px] rounded-full bg-[#242428]/95 backdrop-blur-2xl border border-white/[0.12] shadow-[0_12px_36px_rgba(0,0,0,0.75)] grid grid-cols-5 items-center px-1.5">
           <!-- Home Tab -->
           <button id="bottom-tab-home" onclick="switchView('home')" class="flex flex-col items-center justify-center gap-0.5 py-1 rounded-full transition text-[#FA243C]">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -308,7 +336,7 @@
       </nav>
 
       <!-- Up Next Queue Drawer -->
-      <aside id="queue-drawer" class="fixed top-14 bottom-20 right-0 w-80 max-w-[90vw] glass-panel border-l border-white/[0.08] z-30 transform translate-x-full transition-transform duration-200 flex flex-col shadow-2xl">
+      <aside id="queue-drawer" class="fixed top-14 bottom-[152px] right-0 w-80 max-w-[90vw] glass-panel border-l border-white/[0.08] z-30 transform translate-x-full transition-transform duration-200 flex flex-col shadow-2xl">
         <div class="p-4 border-b border-white/[0.08] flex items-center justify-between">
           <div>
             <h3 class="text-sm font-bold text-white">Up Next</h3>
@@ -324,8 +352,8 @@
     </main>
   </div>
 
-  <!-- Bottom Persistent Apple Music Now-Playing Dock -->
-  <footer class="h-20 sm:h-[84px] glass-panel border-t border-white/[0.08] px-3 sm:px-6 flex items-center justify-between gap-3 z-50 shrink-0">
+  <!-- Persistent Apple Music Now-Playing Dock Positioned Just Above the Bottom Nav Bar -->
+  <footer class="apple-player-dock h-20 sm:h-[84px] glass-panel border-t border-white/[0.08] px-3 sm:px-6 flex items-center justify-between gap-3 z-40 shrink-0">
 
     <!-- Left: Artwork & Track Metadata -->
     <div class="flex items-center gap-3 w-[30%] min-w-[130px] sm:min-w-[200px]">
@@ -592,54 +620,188 @@
     </div>
   </div>
 
+  <!-- PWA Install & Mobile Home Screen Shortcut Guide Modal -->
+  <div id="pwa-install-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+    <div class="bg-[#232328] border border-white/10 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FA243C] to-[#FF5E7E] flex items-center justify-center shadow-lg shadow-[#FA243C]/25">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Install Apple Music App</h3>
+            <p class="text-[11px] text-neutral-400">Standalone full-screen app & Home Screen shortcut</p>
+          </div>
+        </div>
+        <button onclick="closePWAInstallModal()" class="text-neutral-400 hover:text-white p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div id="pwa-native-prompt-box" class="hidden rounded-xl bg-[#FA243C]/12 border border-[#FA243C]/30 p-3.5 flex items-center justify-between gap-3">
+        <div class="text-xs text-neutral-200">
+          <span class="font-bold text-white block">Ready for One-Tap Install</span>
+          <span>Install directly via Google Chrome with app icon & shortcut.</span>
+        </div>
+        <button onclick="executeNativeInstallPrompt()" class="px-4 py-2 rounded-full bg-[#FA243C] hover:bg-[#E01E34] text-white text-xs font-bold shrink-0 shadow">
+          Install Now
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs text-neutral-300">
+        <div class="rounded-xl bg-white/[0.04] border border-white/[0.07] p-3.5 space-y-1.5">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Google Chrome (Android & Desktop)</span>
+          </div>
+          <p class="text-neutral-400 leading-relaxed">
+            Tap the <strong class="text-white">⋮ (three dots)</strong> menu in Chrome's top-right corner (or the install icon in the address bar) and select <strong class="text-white">"Add to Home screen"</strong> → <strong class="text-white">"Install"</strong>.
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-white/[0.04] border border-white/[0.07] p-3.5 space-y-1.5">
+          <div class="font-bold text-white flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            <span>Safari (iPhone & iPad)</span>
+          </div>
+          <p class="text-neutral-400 leading-relaxed">
+            Tap the <strong class="text-white">Share</strong> button at the bottom of Safari, scroll down, and tap <strong class="text-white">"Add to Home Screen"</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end pt-1">
+        <button onclick="closePWAInstallModal()" class="px-5 py-2 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition">
+          Got It
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-200">
+  <div id="toast" class="fixed bottom-40 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-200">
     <div id="toast-inner" class="px-4 py-2 rounded-full bg-neutral-900/95 border border-white/15 text-xs font-medium text-white shadow-xl backdrop-blur-md"></div>
   </div>
 
   <script>
     /**
-     * Progressive Web App (PWA) Manifest & Service Worker Setup
+     * Progressive Web App (PWA) Manifest, PNG Canvas Icons & Service Worker Setup
+     * Generates true 192x192 and 512x512 PNG icons so Google Chrome WebAPK installability works reliably.
      */
+    let deferredInstallPrompt = null;
+
+    function generateAppIconPNG(size, maskable = false) {
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      const grad = ctx.createLinearGradient(0, 0, size, size);
+      grad.addColorStop(0, '#FA243C');
+      grad.addColorStop(1, '#FF5E7E');
+
+      if (maskable) {
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, size, size);
+      } else {
+        const radius = size * 0.225;
+        ctx.beginPath();
+        ctx.moveTo(radius, 0);
+        ctx.lineTo(size - radius, 0);
+        ctx.quadraticCurveTo(size, 0, size, radius);
+        ctx.lineTo(size, size - radius);
+        ctx.quadraticCurveTo(size, size, size - radius, size);
+        ctx.lineTo(radius, size);
+        ctx.quadraticCurveTo(0, size, 0, size - radius);
+        ctx.lineTo(0, radius);
+        ctx.quadraticCurveTo(0, 0, radius, 0);
+        ctx.closePath();
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      // Draw crisp white eighth-note glyph scaled to canvas size
+      const scale = (size / 512) * (maskable ? 0.78 : 0.92);
+      const offset = (size - 512 * scale) / 2;
+      ctx.save();
+      ctx.translate(offset, offset);
+      ctx.scale(scale, scale);
+
+      const notePath = new Path2D(
+        'M368 112L192 152v188.5c-11.8-6.8-25.4-11-40-11-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80V226l120-27.3v105.8c-11.8-6.8-25.4-11-40-11-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80V112z'
+      );
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill(notePath);
+      ctx.restore();
+
+      return canvas.toDataURL('image/png');
+    }
+
     (function setupPWAInstallability() {
       try {
-        const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FA243C"/><stop offset="100%" stop-color="#FF5E7E"/></linearGradient></defs><rect width="512" height="512" rx="115" fill="url(#g)"/><path fill="#ffffff" d="M368 112L192 152v188.5c-11.8-6.8-25.4-11-40-11-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80V226l120-27.3v105.8c-11.8-6.8-25.4-11-40-11-44.2 0-80 35.8-80 80s35.8 80 80 80 80-35.8 80-80V112z"/></svg>`;
-        const iconDataUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(iconSvg);
+        const png192 = generateAppIconPNG(192, false);
+        const png512 = generateAppIconPNG(512, false);
+        const png192Maskable = generateAppIconPNG(192, true);
+        const png512Maskable = generateAppIconPNG(512, true);
 
-        const appleIconLink = document.createElement('link');
-        appleIconLink.rel = 'apple-touch-icon';
-        appleIconLink.href = iconDataUrl;
-        document.head.appendChild(appleIconLink);
+        const faviconEl = document.getElementById('pwa-favicon');
+        if (faviconEl) faviconEl.href = png192;
+
+        const appleIconEl = document.getElementById('pwa-apple-icon');
+        if (appleIconEl) appleIconEl.href = png512;
 
         const baseUrl = window.location.href.split('#')[0].split('?')[0];
         const scopeUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) || '/';
 
         const manifestObj = {
+          id: baseUrl,
           name: "Apple Music — Artist Collection",
           short_name: "Apple Music",
           description: "High-fidelity multi-artist streaming player with CarPlay & Android Auto support.",
           start_url: baseUrl,
           scope: scopeUrl,
           display: "standalone",
+          display_override: ["standalone", "minimal-ui"],
           orientation: "any",
           background_color: "#18181B",
           theme_color: "#18181B",
+          categories: ["music", "entertainment"],
           icons: [
-            { src: iconDataUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
-            { src: iconDataUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+            { src: png192, sizes: "192x192", type: "image/png", purpose: "any" },
+            { src: png512, sizes: "512x512", type: "image/png", purpose: "any" },
+            { src: png192Maskable, sizes: "192x192", type: "image/png", purpose: "maskable" },
+            { src: png512Maskable, sizes: "512x512", type: "image/png", purpose: "maskable" }
+          ],
+          shortcuts: [
+            {
+              name: "Artist Radio",
+              short_name: "Radio",
+              description: "Shuffle songs across all artists",
+              url: baseUrl + "?action=radio",
+              icons: [{ src: png192, sizes: "192x192", type: "image/png" }]
+            },
+            {
+              name: "Search Music",
+              short_name: "Search",
+              description: "Search albums, artists, and songs",
+              url: baseUrl + "?action=search",
+              icons: [{ src: png192, sizes: "192x192", type: "image/png" }]
+            }
           ]
         };
 
         const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
         const manifestUrl = URL.createObjectURL(manifestBlob);
-        const manifestLink = document.createElement('link');
+        const manifestLink = document.getElementById('pwa-manifest-link') || document.createElement('link');
         manifestLink.rel = 'manifest';
         manifestLink.href = manifestUrl;
-        document.head.appendChild(manifestLink);
+        if (!manifestLink.parentNode) document.head.appendChild(manifestLink);
 
         if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
           const swCode = `
-            const CACHE_NAME = 'apple-music-pwa-v1';
+            const CACHE_NAME = 'apple-music-pwa-v2';
             self.addEventListener('install', (e) => {
               self.skipWaiting();
             });
@@ -651,7 +813,15 @@
               const url = new URL(e.request.url);
               if (url.hostname.includes('archive.org')) return;
               e.respondWith(
-                fetch(e.request).catch(() => caches.match(e.request))
+                fetch(e.request)
+                  .then((networkRes) => {
+                    if (networkRes && networkRes.status === 200 && url.origin === self.location.origin) {
+                      const copy = networkRes.clone();
+                      caches.open(CACHE_NAME).then((cache) => cache.put(e.request, copy));
+                    }
+                    return networkRes;
+                  })
+                  .catch(() => caches.match(e.request))
               );
             });
           `;
@@ -661,6 +831,77 @@
         }
       } catch (e) {}
     })();
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      updatePWAInstallUI();
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredInstallPrompt = null;
+      closePWAInstallModal();
+      updatePWAInstallUI();
+      showToast('Apple Music installed to your device!', 'info');
+    });
+
+    function isAppRunningStandalone() {
+      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
+
+    function updatePWAInstallUI() {
+      const headerBtn = document.getElementById('header-install-btn');
+      const sidebarBtn = document.getElementById('sidebar-install-btn');
+      const standalone = isAppRunningStandalone();
+
+      if (headerBtn) {
+        headerBtn.classList.toggle('hidden', standalone);
+      }
+      if (sidebarBtn) {
+        sidebarBtn.classList.toggle('hidden', standalone);
+      }
+    }
+
+    async function triggerPWAInstall() {
+      if (deferredInstallPrompt) {
+        await executeNativeInstallPrompt();
+      } else {
+        openPWAInstallModal();
+      }
+    }
+
+    async function executeNativeInstallPrompt() {
+      if (!deferredInstallPrompt) {
+        openPWAInstallModal();
+        return;
+      }
+      deferredInstallPrompt.prompt();
+      const choiceResult = await deferredInstallPrompt.userChoice;
+      if (choiceResult && choiceResult.outcome === 'accepted') {
+        deferredInstallPrompt = null;
+        closePWAInstallModal();
+      }
+    }
+
+    function openPWAInstallModal() {
+      const modal = document.getElementById('pwa-install-modal');
+      const nativeBox = document.getElementById('pwa-native-prompt-box');
+      if (nativeBox) {
+        nativeBox.classList.toggle('hidden', !deferredInstallPrompt);
+      }
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closePWAInstallModal() {
+      const modal = document.getElementById('pwa-install-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
 
     /**
      * Artist Registry & Artwork Configuration
@@ -932,6 +1173,7 @@
     // Initialization
     // ==========================================
     window.addEventListener('DOMContentLoaded', () => {
+      updatePWAInstallUI();
       loadAdminSession();
       loadArtworkCache();
       loadHiddenAlbums();
@@ -954,7 +1196,17 @@
       renderSidebarArtists();
       renderSidebarPlaylists();
       renderSidebarAlbums();
-      renderCurrentView();
+
+      // Handle Home Screen App Shortcut deep links (?action=radio or ?action=search)
+      const urlParams = new URLSearchParams(window.location.search);
+      const launchAction = urlParams.get('action');
+      if (launchAction === 'search') {
+        switchView('search');
+      } else if (launchAction === 'radio') {
+        switchView('radio');
+      } else {
+        renderCurrentView();
+      }
     });
 
     function saveLastPlayedState(track) {
